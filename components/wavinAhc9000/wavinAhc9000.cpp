@@ -53,13 +53,18 @@ void WavinAhc9000::set_target_temp(int channel, float temperature) {
   temp_channel_.push_back(channel);
 }
 
+void WavinAhc9000::set_mode(int channel, int mode) {
+  set_mode_.push_back(mode);
+  mode_channel_.push_back(channel);
+}
+
 void WavinAhc9000::on_modbus_data(const std::vector<uint8_t> &data) {
-  ESP_LOGV(TAG, "Channel %d, state %d, Data: %s", channel_ + 1, state_, hexencode(data).c_str());
+  ESP_LOGD(TAG, "Channel %d, state %d, Data: %s", channel_ + 1, state_, hexencode(data).c_str());
   float temperature;
   switch (state_) {
     case 0:
       temperature = ((data[0] << 8) + data[1]) / 10.0;
-      ESP_LOGD(TAG, "Confirmed target temperature channel %i: %.1f", channel_ + 1, temperature);
+      ESP_LOGV(TAG, "Confirmed target temperature channel %i: %.1f", channel_ + 1, temperature);
       channel_ = -1;
       break;
     case 1:
@@ -110,9 +115,11 @@ void WavinAhc9000::handle_target_temp_data_(const std::vector<uint8_t> &data) {
 }
 
 void WavinAhc9000::handle_mode_data_(const std::vector<uint8_t> &data) {
-  int mode = data[0] & MODE_MASK;
-  ESP_LOGD(TAG, "Mode channel %i: %d",channel_ + 1, mode );
-  mode_callbacks_[channel_].call(mode);
+  int mode = data[1] & MODE_MASK;
+  ESP_LOGD(TAG, "Mode (int) channel %i: %d",channel_ + 1, mode );
+  bool mode_on = data[1] & MODE_MASK;
+  ESP_LOGD(TAG, "Mode (bool) channel %i: %i",channel_ + 1, mode_on );
+  mode_callbacks_[channel_].call(mode_on);
 }
 
 uint16_t crc16(const uint8_t *data, uint8_t len) {
@@ -155,7 +162,7 @@ void WavinAhc9000::loop() {
     set_temp_.erase(set_temp_.begin());
     channel_ = temp_channel_.front();
     temp_channel_.erase(temp_channel_.begin());
-    ESP_LOGV(TAG, "Setting temperature for channel %d: %d", channel_ + 1, temperature);
+    ESP_LOGD(TAG, "Setting temperature for channel %d: %d", channel_ + 1, temperature);
     uint8_t data[10] = {address_, MODBUS_WRITE_REGISTER, CATEGORY_PACKED_DATA, PACKED_DATA_MANUAL_TEMPERATURE,
                         (uint8_t)channel_, 1, (uint8_t)(temperature >> 8), (uint8_t)(temperature & 0xff), 0, 0};
     uint16_t crc = crc16(data, 8);
@@ -170,6 +177,16 @@ void WavinAhc9000::loop() {
     last_update_time = now;
     return;
   }
+
+  if(set_mode_.size() && channel_ < 0) {
+    int mode_int = set_mode_.front();
+    set_mode_.erase(set_mode_.begin());
+    channel_ = mode_channel_.front();
+    mode_channel_.erase(mode_channel_.begin());
+    ESP_LOGD(TAG, "SEND SOMETHING TO MODBUS: Channel is: %i Mode is: %i", channel_ + 1, mode_int);
+  }
+
+
 
   if (start_scan_) {
     start_scan_ = false;
@@ -213,6 +230,8 @@ void WavinAhc9000::loop() {
 void WavinAhc9000::update() {
   start_scan_ = true;
 }
+
+
 
 /*
 // ------------------------------------------------
