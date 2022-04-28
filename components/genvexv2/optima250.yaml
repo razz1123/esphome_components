@@ -11,7 +11,7 @@ genvexv2:
 select:
   - platform: genvexv2
     modbus_controller_id: genvex_modbus_controller
-    name: "Speed"
+    name: "Genvex Speed"
     id: genvex_speed_mode    
     address: 100
     options:
@@ -23,7 +23,7 @@ select:
       
   - platform: genvexv2
     modbus_controller_id: genvex_modbus_controller
-    name: "Timer"
+    name: "Genvex Timer"
     id: genvex_timer    
     address: 106
     options:
@@ -41,7 +41,7 @@ select:
     
 sensor:
   - platform: template
-    name: "Virkningsgrad"
+    name: "Genvex Virkningsgrad"
     lambda: |-
       float genvex_temp_t1_inlet = (id(genvex_temp_t1).state);
       float genvex_temp_t3_outdoor = (id(genvex_temp_t3).state);
@@ -53,7 +53,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Supply temperature (T1)"
+    name: "Genvex Supply temperature (T1)"
     id: genvex_temp_t1
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -67,7 +67,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Inlet temperature (T3)"
+    name: "Genvex Inlet temperature (T3)"
     id: genvex_temp_t3
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -81,7 +81,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Exhaust temperature (T4)"
+    name: "Genvex Exhaust temperature (T4)"
     id: genvex_temp_t4
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -95,7 +95,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Extract temperature (T7)"
+    name: "Genvex Extract temperature (T7)"
     id: genvex_temp_t7
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -109,7 +109,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Temperature panel (T2)"
+    name: "Genvex Temperature panel (T2)"
     id: genvex_temp_t2_panel
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -123,7 +123,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Measured humidity"
+    name: "Genvex Measured humidity"
     id: genvex_messured_humidity
     unit_of_measurement: '%'
     accuracy_decimals: 1
@@ -140,7 +140,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Inlet fan"
+    name: "Genvex Inlet fan"
     id: genvex_inlet_fan
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -149,7 +149,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Extract fan"
+    name: "Genvex Extract fan"
     id: genvex_extract_fan
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -158,7 +158,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Bypass (%)"
+    name: "Genvex Bypass (%)"
     id: genvex_bypass
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -176,7 +176,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Humidity fan control"
+    name: "Genvex Humidity fan control"
     id: genvex_humidity_fan_control
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -185,13 +185,13 @@ sensor:
 
 text_sensor:
   - platform: template
-    name: "Air Quality Index Humidity (AQI)"
+    name: "Genvex Air Quality Index Humidity (AQI)"
     id: aqi_humidity
     icon: mdi:water-percent 
 
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Alarm"
+    name: "Genvex Alarm"
     id: genvex_alarm
     register_type: read
     address: 101
@@ -335,7 +335,7 @@ text_sensor:
 number:
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Target temp"
+    name: "Genvex Target temp"
     id: genvex_target_temp
     min_value: 10
     max_value: 30
@@ -349,7 +349,7 @@ number:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Ventilation speed"
+    name: "Genvex Ventilation speed"
     id: genvex_ventilation_speed
     min_value: 0
     max_value: 4
@@ -359,7 +359,7 @@ number:
 binary_sensor:
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Bypass (On/Off)"
+    name: "Genvex Bypass (On/Off)"
     id: genvex_bypass_on_off
     register_type: read
     address: 107        
