@@ -53,7 +53,7 @@ sensor:
     
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Genvex Supply temperature (T1)"
+    name: "Genvex temp t1"
     id: genvex_temp_t1
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -67,7 +67,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Genvex Inlet temperature (T3)"
+    name: "Genvex temp t3"
     id: genvex_temp_t3
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -81,7 +81,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Genvex Exhaust temperature (T4)"
+    name: "Genvex temp t4"
     id: genvex_temp_t4
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -95,7 +95,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Genvex Extract temperature (T7)"
+    name: "Genvex temp t7"
     id: genvex_temp_t7
     unit_of_measurement: °C
     accuracy_decimals: 1
@@ -109,7 +109,7 @@ sensor:
       
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
-    name: "Genvex Temperature panel (T2)"
+    name: "Genvex temp t2 panel"
     id: genvex_temp_t2_panel
     unit_of_measurement: °C
     accuracy_decimals: 1
