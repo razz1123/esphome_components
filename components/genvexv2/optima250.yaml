@@ -374,6 +374,7 @@ climate:
     current_temp_sensor_id: genvex_temp_t7
     target_temp_sensor_id: genvex_target_temp
     fan_speed_sensor_id: genvex_ventilation_speed
-    min_value: 5
-    max_value: 35
-    step: 0.5
+    visual:
+      min_temperature: 5 °C
+      max_temperature: 30 °C
+      temperature_step: 0.5 °C
