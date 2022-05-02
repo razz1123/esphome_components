@@ -375,6 +375,6 @@ climate:
     target_temp_sensor_id: genvex_target_temp
     fan_speed_sensor_id: genvex_ventilation_speed
     visual:
-      min_temperature: 5 °C
+      min_temperature: 10 °C
       max_temperature: 30 °C
       temperature_step: 0.5 °C
