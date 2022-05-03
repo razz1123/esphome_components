@@ -42,6 +42,7 @@ select:
 sensor:
   - platform: template
     name: "Genvex Virkningsgrad"
+    unit_of_measurement: '%'
     lambda: |-
       float genvex_temp_t1_inlet = (id(genvex_temp_t1).state);
       float genvex_temp_t3_outdoor = (id(genvex_temp_t3).state);
@@ -124,7 +125,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: genvex_modbus_controller
     name: "Genvex Measured humidity"
-    id: genvex_messured_humidity
+    id: genvex_measured_humidity
     unit_of_measurement: '%'
     accuracy_decimals: 1
     device_class: humidity
