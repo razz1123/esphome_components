@@ -42,12 +42,15 @@ select:
 sensor:
   - platform: template
     name: "Genvex Virkningsgrad"
+    id: genvex_virkningsgrad
     unit_of_measurement: '%'
     lambda: |-
       float genvex_temp_t1_inlet = (id(genvex_temp_t1).state);
       float genvex_temp_t3_outdoor = (id(genvex_temp_t3).state);
       float genvex_temp_t7_extract = (id(genvex_temp_t7).state);
       float x = (100 * (genvex_temp_t1_inlet - genvex_temp_t3_outdoor) / (genvex_temp_t7_extract - genvex_temp_t3_outdoor));
+      if(x > 100){ x = 100; }
+      if(x < 0) { x = 0; }
       return x;
     update_interval: 60s
     state_class: measurement
