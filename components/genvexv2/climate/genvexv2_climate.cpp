@@ -64,7 +64,7 @@ void Genvexv2Climate::control(const climate::ClimateCall& call) {
         if(optional_genvexv2_fan_mode.has_value())
         {
           auto genvexv2_fan_mode = optional_genvexv2_fan_mode.value();
-          ESP_LOGD(TAG, "Custom Fan mode set to: %i", static_cast<int>(genvexv2_fan_mode));
+          //ESP_LOGD(TAG, "Custom Fan mode set to: %i", static_cast<int>(genvexv2_fan_mode));
           fan_speed_number_->set(genvexv2_fan_mode);
         }
         break;
