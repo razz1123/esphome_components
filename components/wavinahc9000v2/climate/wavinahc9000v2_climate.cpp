@@ -49,7 +49,7 @@ void Wavinahc9000v2Climate::control(const climate::ClimateCall& call) {
     float target = ((roundf(target_temperature * 2.0) / 2));
     ESP_LOGV(TAG, "Rounded to nearest half: %f", target);
     ESP_LOGD(TAG, "Target temperature changed to: %f", target);
-    temp_setpoint_number_->set(target);
+    temp_setpoint_number_->make_call().set_value(target).perform();//set(target);
   }
 
   if (call.get_mode().has_value())
@@ -83,7 +83,7 @@ climate::ClimateTraits Wavinahc9000v2Climate::traits() {
   traits.set_supports_action(true);
 
   traits.set_supports_current_temperature(true);
-  traits.set_visual_temperature_step(0.1);
+  traits.set_visual_temperature_step(0.5);
   traits.set_visual_min_temperature(6);
   traits.set_visual_max_temperature(40);
 
