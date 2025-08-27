@@ -58,7 +58,7 @@ void Genvexv2Climate::control(const climate::ClimateCall& call) {
       case climate::CLIMATE_MODE_AUTO: 
       {
         ESP_LOGD("TAG", "Mode changed to AUTO");
-        this->custom_fan_mode = esphome::to_string("2");
+        this->custom_fan_mode = esphome::to_string(2);
         fan_mode.reset();
         auto optional_genvexv2_fan_mode = parse_number<float>("2");
         if(optional_genvexv2_fan_mode.has_value())
